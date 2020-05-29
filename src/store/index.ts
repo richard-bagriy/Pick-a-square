@@ -49,8 +49,7 @@ export const initialState: InitialStateType = {
     history: []
 }
 
-// Todo: Add type for action
-export const reducer = (state = initialState, action: any) => {
+export const reducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case SET_SETTING: 
             return {
@@ -130,6 +129,9 @@ export const reducer = (state = initialState, action: any) => {
     }
 }
 
+type ActionType = SetGameSettingType | SetUserNameType | SetGameBoardType | SetGameStartType | SetGameEndType | SetColType 
+    | SetScorePcType | SetScorePlayerType | SetWinnerType | AddToHistoryType | ClearScroreType
+
 type SetGameSettingType = {
     type: typeof SET_SETTING
     payload: SettingType
@@ -168,7 +170,7 @@ type SetColProps = {
 }
 type SetColType = {
     type: typeof SET_COL
-    payload: { x: number, y: number, value: number }
+    payload: SetColProps
 }
 export const setCol: (obj: SetColProps) => SetColType 
     = ({ x, y, value }) => ({ type: SET_COL, payload: { x, y, value } })
