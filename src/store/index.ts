@@ -1,3 +1,5 @@
+import { createContext, Dispatch } from "react"
+
 const SET_SETTING = 'GAME/SET_SETTING'
 const SET_USER_NAME = 'GAME/SET_USER_NAME'
 const SET_GAME_BOARD = 'GAME/SET_GAME_BOARD'
@@ -14,6 +16,7 @@ type SettingType = {
     name: string
     field: number
     delay: number
+    id: number
 }
 
 type WinnerType = {
@@ -25,7 +28,7 @@ type InitialStateType = {
     settings: Array<SettingType>
     setting: SettingType | {}
     userName: string
-    board: Array<number> | []
+    board: Array<Array<number>> | []
     start: boolean
     end: boolean
     score: { pc: number, player: number }
@@ -33,11 +36,18 @@ type InitialStateType = {
     history: Array<WinnerType> | []
 }
 
+type GameContextType = {
+    state: InitialStateType
+    dispatch: Dispatch<ActionType>
+}
+
+export const GameContext = createContext({} as GameContextType)
+
 export const initialState: InitialStateType = {
-    settings: [
-        { name: 'Easy', field: 5, delay: 2000 },
-        { name: 'Normal', field: 10, delay: 1000 },
-        { name: 'Hard', field: 15, delay: 900 }
+    settings: [ 
+        { name: 'Easy', field: 5, delay: 2000, id: 0 },
+        { name: 'Normal', field: 10, delay: 1000, id: 1 },
+        { name: 'Hard', field: 15, delay: 900, id: 2 }
     ],
     setting: {},
     userName: '',
@@ -49,7 +59,7 @@ export const initialState: InitialStateType = {
     history: []
 }
 
-export const reducer = (state = initialState, action: ActionType) => {
+export const reducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_SETTING: 
             return {
@@ -65,7 +75,7 @@ export const reducer = (state = initialState, action: ActionType) => {
             return {
                 ...state,
                 board: [
-                    ...new Array(action.payload).fill(0)
+                    ... new Array(action.payload).fill(0)
                         .map(() => new Array(action.payload).fill(0) )
                 ]
             }
@@ -129,7 +139,7 @@ export const reducer = (state = initialState, action: ActionType) => {
     }
 }
 
-type ActionType = SetGameSettingType | SetUserNameType | SetGameBoardType | SetGameStartType | SetGameEndType | SetColType 
+export type ActionType = SetGameSettingType | SetUserNameType | SetGameBoardType | SetGameStartType | SetGameEndType | SetColType 
     | SetScorePcType | SetScorePlayerType | SetWinnerType | AddToHistoryType | ClearScroreType
 
 type SetGameSettingType = {
