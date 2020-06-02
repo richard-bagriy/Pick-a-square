@@ -3,9 +3,8 @@ import Select from './Select'
 import Input from './Input'
 import Button from './Button'
 
-const GameOptions: React.FC = () => {
-
-    return <div className="game-setting">
+const GameOptions: React.FC = () => (
+    <div className="game-setting">
         <h2>- Game setting - </h2>
         <div className="flex justify-content-around">
             <Select />
@@ -13,6 +12,6 @@ const GameOptions: React.FC = () => {
             <Button />
         </div>
     </div>
-}
+)
 
 export default GameOptions
