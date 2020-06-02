@@ -70,6 +70,7 @@ body {
 .container {
     max-width: 1200px;
     margin: auto;
+    padding: 0 20px;
 }
 
 .select {
@@ -184,9 +185,10 @@ body {
 }
 
 .history {
-    margin-left: 50px;
+    margin-left: 40px;
     padding: 15px;
     border-left: 1px solid $gray;
+    width: 300px;
 
     &__header {
         font-size: 28px;
@@ -194,6 +196,7 @@ body {
         font-weight: bold;
         margin-top: 0;
         margin-bottom: 8px;
+        text-align: center;
     }
 
     &__item {
@@ -211,18 +214,8 @@ body {
 }
 
 .board {
-
-    &__row {
-        height: 40px;
-
-        > div:not(:last-child) {
-            border-right: none;
-        }
-    }
-
-    &__row:not(:last-child) > &__col {
-        border-bottom: none;
-    }
+    display: flex;
+    flex-wrap: wrap;
     
     &__col {
         width: 40px;
@@ -255,4 +248,56 @@ body {
     font-weight: 800;
     margin-top: 25px;
     @extend .shadow, .text-center
+}
+
+@media (max-width: 970px) {
+
+    .game-desk {
+        flex-direction: column;
+        align-items: center;
+
+        .history {
+            border: 1px solid $gray;
+            margin-top: 35px;
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    .input, .select {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .input, .select {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .game-setting > div {
+        flex-direction: column;
+
+        .input, .select {
+            margin-bottom: 10px;
+            max-width: 100%;
+        }
+
+        .button {
+            height: 50px;
+            margin: auto;
+        }
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .logo {
+        max-width: 85px;
+    }
+    
 }
