@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { GameContext, setGameStart } from '../../store'
+import { GameContext, setGameStart, setGameEnd, setGameBoard } from '../../store'
 
 const Button: React.FC = () => {
     const { state: { userName, setting, end, start } , dispatch } = useContext(GameContext)
@@ -26,6 +26,11 @@ const Button: React.FC = () => {
 
     const handleClick = () => {
         dispatch(setGameStart(true))
+        dispatch(setGameEnd(false))
+
+        if (setting.field) {
+            dispatch(setGameBoard(setting.field))
+        }
     }
     
     return <button disabled={disabled} onClick={handleClick} className={`button ${disabled ? 'danger' : 'success'} `}>{ text }</button>

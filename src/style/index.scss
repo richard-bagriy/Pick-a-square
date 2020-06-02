@@ -1,4 +1,4 @@
-$grey: #585958;
+$gray: #585958;
 $light-grey: #777777;
 $white: #fff;
 $blue: #55acee;
@@ -59,7 +59,7 @@ body {
 }
 
 .h1 {
-    color: $grey;
+    color: $gray;
     font-weight: 800;
 
     &.logo-header {
@@ -86,7 +86,7 @@ body {
     @include Input(350px);
 
     &::placeholder {
-        color: $grey;
+        color: $gray;
         opacity: 1;
     }
 }
@@ -123,7 +123,7 @@ body {
         padding: 8px;
         margin-top: 6px;
         margin-bottom: 15px;
-        color: $grey;
+        color: $gray;
         font-weight: 800;
         @extend .text-center;
     }
@@ -135,7 +135,7 @@ body {
     border-radius: 5px;
     padding: 0 25px;
     max-height: 40px;
-    font-size: 22px;
+    font-size: 21px;
     color: $white;
     position: relative;
     display: block;
@@ -174,10 +174,43 @@ body {
     }
 }
 
-.board {
-    margin-top: 50px;
+.game-desk {
+    margin-top: 35px;
     padding: 35px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    @extend .shadow
+}
+
+.history {
+    margin-left: 50px;
+    padding: 15px;
+    border-left: 1px solid $gray;
+
+    &__header {
+        font-size: 28px;
+        color: $gray;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    &__item {
+        background-color: $light-grey;
+        color: $white;
+        font-size: 15px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        margin-bottom: 6px;
+
+    }
+}
+
+.board {
 
     &__row {
         height: 40px;
@@ -197,7 +230,7 @@ body {
         display: inline-block;
         font-size: 0;
         box-sizing: border-box;
-        border: 1px solid $grey;
+        border: 1px solid $gray;
         cursor: pointer;
 
         &.blue {
@@ -212,6 +245,14 @@ body {
             background: $red;
         }
     }
+    
+}
 
-    @extend .shadow
+.winner {
+    color: $gray;
+    font-size: 24px;
+    padding: 25px;
+    font-weight: 800;
+    margin-top: 25px;
+    @extend .shadow, .text-center
 }

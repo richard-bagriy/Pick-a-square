@@ -19,20 +19,20 @@ type SettingType = {
     id: number
 }
 
-type WinnerType = {
+export type WinnerType = {
     time: string
     name: string
 }
 
 type InitialStateType = {
     settings: Array<SettingType>
-    setting: SettingType | {}
+    setting: SettingType
     userName: string
     board: Array<Array<number>> | []
     start: boolean
     end: boolean
     score: { pc: number, player: number }
-    winner: WinnerType | {}
+    winner: WinnerType
     history: Array<WinnerType> | []
 }
 
@@ -49,13 +49,13 @@ export const initialState: InitialStateType = {
         { name: 'Normal', field: 10, delay: 1000, id: 1 },
         { name: 'Hard', field: 15, delay: 900, id: 2 }
     ],
-    setting: {},
+    setting: { name: '', field: 0, delay:0, id: 0 },
     userName: '',
     board: [],
     start: false,
     end: false,
     score: { pc: 0, player: 0 },
-    winner: {},
+    winner: { time: '', name: '' },
     history: []
 }
 
@@ -75,7 +75,7 @@ export const reducer = (state = initialState, action: ActionType): InitialStateT
             return {
                 ...state,
                 board: [
-                    ... new Array(action.payload).fill(0)
+                    ...new Array(action.payload).fill(0)
                         .map(() => new Array(action.payload).fill(0) )
                 ]
             }

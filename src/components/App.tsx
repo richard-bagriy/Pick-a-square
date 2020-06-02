@@ -2,7 +2,9 @@ import React, { useReducer } from 'react';
 import { reducer, initialState, GameContext } from '../store';
 import Logo from './Logo';
 import GameOptions from './GameOptions';
-import Board from './Board';
+import Engine from './Engine';
+import Winner from './Winner';
+import GameDesk from './GameDesk';
 
 const App: React.FC = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -11,7 +13,9 @@ const App: React.FC = () => {
         <Logo />
         <GameContext.Provider value={{ state, dispatch }}>
             <GameOptions />
-            { state.board.length > 1 && <Board board={state.board} /> }
+            { state.end && <Winner name={state.winner.name} /> }
+            { state.start && <Engine /> }
+            { state.board.length > 0 &&  <GameDesk />}
         </GameContext.Provider>
     </div>
 }
